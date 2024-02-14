@@ -7,7 +7,13 @@ function Start-Firefox {
         [string]
         $profile
     )
-    Start-Process -FilePath 'C:\Program Files\Mozilla Firefox\Firefox.exe' -ArgumentList @('-P', $profile)
+    $FilePath = 'C:\Program Files\Mozilla Firefox\Firefox.exe'
+    $args = @('')
+    if($profile) {
+        Start-Process -FilePath $FilePath -ArgumentList @('-P', $profile)
+    } else {
+        Start-Process -FilePath $FilePath
+    }
 }
 
 Register-ArgumentCompleter -CommandName Start-Firefox -ParameterName profile -ScriptBlock {
